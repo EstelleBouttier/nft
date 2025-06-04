@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
@@ -20,4 +20,129 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+	<!-- Page header -->
+	<section class="page-header bg--cover" style="background-image:url(assets/images/header/1.png)">
+		<div class="container">
+			<div class="page-header__content" data-aos="fade-right" data-aos-duration="1000">
+				<h2>Register</h2>
+				<nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item ">
+							<a href="{{ path('app_home') }}">Home</a>
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">Register</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="page-header__shape">
+				<span class="page-header__shape-item page-header__shape-item--1"><img src="assets/images/header/2.png" alt="shape-icon"></span>
+			</div>
+		</div>
+	</section>
+
+	<!-- Registration form section -->
+	<section class="account padding-top padding-bottom sec-bg-color2">
+		<div class="container">
+			<div class="account__wrapper" data-aos="fade-up" data-aos-duration="800">
+				<div class="row g-4">
+					<div class="col-lg-12">
+						<div
+							class="account__content account__content--style1">
+
+							<!-- Title -->
+							<div class="account__header">
+								<h2>Create your account</h2>
+								<p>Ready to join? Fill out the form below and start your journey with us.</p>
+							</div>
+
+							<!-- Social login -->
+							<div class="account__social">
+								<a href="#" class="account__social-btn">
+									<span><img src="assets/images/others/google.svg" alt="google icon"></span>
+									Continue with Google
+								</a>
+							</div>
+
+							<!-- Divider -->
+							<div class="account__divider account__divider--style1">
+								<span>or</span>
+							</div>
+
+							<!-- Flash messages -->
+							{% for flash_error in app.flashes('verify_email_error') %}
+								<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+							{% endfor %}
+
+                            {% for flash_success in app.flashes('success') %}
+                                <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+                            {% endfor %}
+
+							<!-- Symfony form starts here -->
+							{{ form_start(registrationForm, {'attr': {'class': 'account__form needs-validation'}}) }}
+
+							<div class="row g-4">
+
+								<div class="col-12">
+									<div>
+										{{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+										{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email'}}) }}
+										{# {{ form_errors(registrationForm.email) }} #}
+									</div>
+								</div>
+
+								<div class="col-12">
+									<div class="form-pass">
+										{{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+										{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control showhide-pass', 'placeholder': 'Password'}}) }}
+										{# {{ form_errors(registrationForm.plainPassword) }} #}
+										<button type="button" id="btnToggle" class="form-pass__toggle">
+											<i id="eyeIcon" class="fa fa-eye"></i>
+										</button>
+									</div>
+								</div>
+
+								<div class="col-12">
+									<div class="form-check">
+										{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+										{{ form_label(registrationForm.agreeTerms, 'I agree to the terms', {'label_attr': {'class': 'form-check-label'}}) }}
+										{# {{ form_errors(registrationForm.agreeTerms) }} #}
+									</div>
+								</div>
+
+							</div>
+
+							<button type="submit" class="trk-btn trk-btn--border trk-btn--primary d-block mt-4">Register</button>
+
+							{{ form_end(registrationForm) }}
+
+							<!-- Switch link -->
+							<div class="account__switch">
+								<p>Already have an account?
+									<a href="{{ path('app_login') }}">Log in</a>
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Decorative shape -->
+		<div class="account__shape">
+			<span class="account__shape-item account__shape-item--1">
+				<img src="assets/images/contact/4.png" alt="shape-icon">
+			</span>
+		</div>
+	</section>
+
 {% endblock %}
+
