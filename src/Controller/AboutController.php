@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\TeamRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class AboutController extends AbstractController
 {
@@ -34,12 +35,12 @@ final class AboutController extends AbstractController
 
     
     #[Route('/about/team/{id}', name: 'team_detail')]
-    public function details( /* TeamRepository $teamRepository, int $id */): Response
+    public function details(TeamRepository $teamRepository, int $id): Response
     {
-        // $team = $teamRepository->find($id);
+        $team = $teamRepository->findBy([$id]);
 
         return $this->render('about/team_detail.html.twig', [
-            // 'team' => $team,
+            'team' => $team
         ]);
     }
 }
