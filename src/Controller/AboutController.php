@@ -10,10 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class AboutController extends AbstractController
 {
     #[Route('/about', name: 'app_about')]
-    public function aboutUs(): Response
+    public function aboutUs(TeamRepository $teamRepository): Response
     {
+        $teamMembers = $teamRepository->findAll();
+
         return $this->render('about/index.html.twig', [
             'controller_name' => 'AboutController',
+            'teamMembers' => $teamMembers,
         ]);
     }
 
@@ -26,18 +29,22 @@ final class AboutController extends AbstractController
     }
 
     #[Route('/about/team', name: 'team')]
-    public function team(): Response
+    public function team(TeamRepository $teamRepository): Response
     {
+        $teamMembers = $teamRepository->findAll();
+
         return $this->render('about/team.html.twig', [
             'controller_name' => 'AboutController',
+            'teamMembers' => $teamMembers,
         ]);
     }
 
-    
+
     #[Route('/about/team/{id}', name: 'team_detail')]
     public function details(TeamRepository $teamRepository, int $id): Response
     {
-        $team = $teamRepository->find($id);
+
+        $team = $teamRepository->findBy(['id' => $id]); 
 
         return $this->render('about/team_detail.html.twig', [
             'team' => $team
