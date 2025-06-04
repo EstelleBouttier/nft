@@ -2,12 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\DateTrait;
+use App\Entity\Trait\OnlineTrait;
 use App\Repository\BlogRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
+#[Vich\Uploadable]
 class Blog
 {
+    use DateTrait;
+    use OnlineTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -22,14 +29,15 @@ class Blog
     #[ORM\Column(type: "text")]
     private ?string $content = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $authorName = null;
+    #[Vich\UploadableField(mapping: 'blog', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
 
     public function getId(): ?int
     {
@@ -69,36 +77,40 @@ class Blog
         return $this;
     }
 
-    public function getAuthorName(): ?string
+    public function setImageFile(?File $imageFile = null): void
     {
-        return $this->authorName;
+        $this->imageFile = $imageFile;
+
+        // if (null !== $imageFile) {
+        //     // It is required that at least one field changes if you are using doctrine
+        //     // otherwise the event listeners won't be called and the file is lost
+        //     $this->updatedAt = new \DateTimeImmutable();
+        // }
     }
 
-    public function setAuthorName(string $authorName): static
+    public function getImageFile(): ?File
     {
-        $this->authorName = $authorName;
-        return $this;
+        return $this->imageFile;
     }
 
-    public function getImage(): ?string
+    public function setImageName(?string $imageName): void
     {
-        return $this->image;
+        $this->imageName = $imageName;
     }
 
-    public function setImage(?string $image): static
+    public function getImageName(): ?string
     {
-        $this->image = $image;
-        return $this;
+        return $this->imageName;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function setImageSize(?int $imageSize): void
     {
-        return $this->createdAt;
+        $this->imageSize = $imageSize;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function getImageSize(): ?int
     {
-        $this->createdAt = $createdAt;
-        return $this;
+        return $this->imageSize;
     }
+
 }

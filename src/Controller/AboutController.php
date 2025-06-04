@@ -43,7 +43,8 @@ final class AboutController extends AbstractController
     #[Route('/about/team/{id}', name: 'team_detail')]
     public function details(TeamRepository $teamRepository, int $id): Response
     {
-        $team = $teamRepository->findBy(['id' => $id]); // ✅ Correct
+
+        $team = $teamRepository->findBy(['id' => $id]); 
 
         return $this->render('about/team_detail.html.twig', [
             'team' => $team
