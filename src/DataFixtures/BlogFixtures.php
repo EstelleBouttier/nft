@@ -81,8 +81,7 @@ class BlogFixtures extends Fixture
             $blog->setTitle($post['title']);
             $blog->setCategory($post['category']);
             $blog->setAuthorName($post['author']);
-            $blog->setImage($post['image']);
-            $blog->setContent('content'); 
+            $blog->setContent($post['content']); 
             $blog->setCreatedAt(new \DateTime($post['date']));
 
             $manager->persist($blog);
