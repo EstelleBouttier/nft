@@ -41,7 +41,7 @@ class CategoriesFixtures extends Fixture
 
         foreach ($arrayCategories as $item) {
             $parent = new Categories();
-            $parent->setName($item['title']);
+            $parent->setTitle($item['title']);
             $parent->setSlug($item['slug']);
             $parent->setParent(null);
 
@@ -49,7 +49,7 @@ class CategoriesFixtures extends Fixture
 
             foreach ($item['children'] as $child) {
                 $subCategory = new Categories();
-                $subCategory->setName($child['title']);
+                $subCategory->setTitle($child['title']);
                 $subCategory->setSlug($child['slug']);
                 $subCategory->setParent($parent);
 
