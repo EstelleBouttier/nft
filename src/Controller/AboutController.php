@@ -9,17 +9,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class AboutController extends AbstractController
 {
     #[Route('/about', name: 'app_about')]
-    public function index(): Response
-    {
-        return $this->render('about/index.html.twig', [
-            'controller_name' => 'AboutController',
-        ]);
-    }
-
-    #[Route('/about/about-us', name: 'about_us')]
     public function aboutUs(): Response
     {
-        return $this->render('about/about_us.html.twig', [
+        return $this->render('about/index.html.twig', [
             'controller_name' => 'AboutController',
         ]);
     }
