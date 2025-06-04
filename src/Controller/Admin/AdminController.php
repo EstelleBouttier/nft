@@ -17,6 +17,8 @@ class AdminController extends AbstractDashboardController
         
         // return $this->render('some/path/my-dashboard.html.twig');
         return $this->render('admin/login.html.twig');
+        // return parent::index(); // Active le dashboard EasyAdmin par défaut
+
     }
 
     public function configureDashboard(): Dashboard
