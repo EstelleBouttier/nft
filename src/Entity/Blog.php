@@ -17,16 +17,19 @@ class Blog
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $category = null;
+
+    #[ORM\Column(type: "text")]
     private ?string $content = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $author = null;
+    private ?string $authorName = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createdAt = null;
 
     public function getId(): ?int
     {
@@ -41,7 +44,17 @@ class Blog
     public function setTitle(string $title): static
     {
         $this->title = $title;
+        return $this;
+    }
 
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): static
+    {
+        $this->category = $category;
         return $this;
     }
 
@@ -53,43 +66,39 @@ class Blog
     public function setContent(string $content): static
     {
         $this->content = $content;
-
         return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthorName(): ?string
     {
-        return $this->author;
+        return $this->authorName;
     }
 
-    public function setAuthor(string $author): static
+    public function setAuthorName(string $authorName): static
     {
-        $this->author = $author;
-
+        $this->authorName = $authorName;
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
         return $this;
     }
 }
