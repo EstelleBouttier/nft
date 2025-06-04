@@ -51,15 +51,14 @@
 		<body>
 
 			<!-- ===============>> Preloader start here <<================= -->
-			<div class="preloader">
-				<img src="assets/images/logo/preloader.png" alt="preloader icon">
-			</div>
+			{# <div class="preloader">
+																<img src="assets/images/logo/preloader.png" alt="preloader icon">
+															</div> #}
 			<!-- ===============>> Preloader end here <<================= -->
 
 
 			<!-- ===============>> light&dark switch start here <<================= -->
-			<div class="lightdark-switch">
-				<span class="dark-btn" id="btnSwitch"><img src="assets/images/icon/moon.svg" alt="light-dark-switchbtn" class="swtich-icon"></span>
+				<div class="lightdark-switch"> <span class="dark-btn" id="btnSwitch"><img src="assets/images/icon/moon.svg" alt="light-dark-switchbtn" class="swtich-icon"></span>
 			</div>
 			<!-- ===============>> light&dark switch start here <<================= -->
 
@@ -324,13 +323,17 @@
 								</div>
 							</div>
 							<div class="col-md-7">
+								{% for msg in app.flashes('success') %}
+									<div class="alert alert-success">{{ msg }}</div>
+								{% endfor %}
+
 								<div class="contact__form">
 									{{ form_start(form, {
-    'attr': {
-      'data-aos': 'fade-left',
-      'data-aos-duration': '1000'
-    }
-  }) }}
+                                        'attr': {
+                                        'data-aos': 'fade-left',
+                                        'data-aos-duration': '1000'
+                                        }
+                                    }) }}
 
 									<div class="row g-4">
 
@@ -388,7 +391,7 @@
 									<div class="footer__about">
 										<a href="index-2.html" class="footer__about-logo"><img src="assets/images/logo/logo-dark.png" alt="Logo"></a>
 										<p class="footer__about-moto ">Welcome to our trading site! We offer the best, most
-											                  affordable products and services around. Shop now and start finding great deals!</p>
+																																																							                  affordable products and services around. Shop now and start finding great deals!</p>
 										<div class="footer__app">
 											<div class="footer__app-item footer__app-item--apple">
 												<div class="footer__app-inner">

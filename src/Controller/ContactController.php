@@ -19,11 +19,11 @@ final class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Message envoyé !');
-            return $this->redirectToRoute('app_contact');
+            // return $this->redirectToRoute('app_contact');
         }
 
         return $this->render('contact/index.html.twig', [
-            'controller_name' => 'ContactController',
+            // 'controller_name' => 'ContactController',
              "form" => $form->createView()
         ]);
     }
