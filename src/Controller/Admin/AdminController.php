@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Controller\Admin;
+
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\HttpFoundation\Response;
+
+#[AdminDashboard(routePath: '/admin', routeName: 'admin')]
+class AdminController extends AbstractDashboardController
+{
+    public function index(): Response
+    {
+        // return parent::index();
+        
+        // return $this->render('some/path/my-dashboard.html.twig');
+        return $this->render('admin/login.html.twig');
+    }
+
+    public function configureDashboard(): Dashboard
+    {
+        return Dashboard::new()
+            ->setTitle('Nft');
+    }
+
+    public function configureMenuItems(): iterable
+    {
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+    }
+}
