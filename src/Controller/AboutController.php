@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+
+final class AboutController extends AbstractController
+{
+    #[Route('/about', name: 'app_about')]
+    public function index(): Response
+    {
+        return $this->render('about/index.html.twig', [
+            'controller_name' => 'AboutController',
+        ]);
+    }
+
+    #[Route('/about/about-us', name: 'about_us')]
+    public function aboutUs(): Response
+    {
+        return $this->render('about/about_us.html.twig', [
+            'controller_name' => 'AboutController',
+        ]);
+    }
+
+    #[Route('/about/price', name: 'price')]
+    public function price(): Response
+    {
+        return $this->render('about/price.html.twig', [
+            'controller_name' => 'AboutController',
+        ]);
+    }
+
+    #[Route('/about/team', name: 'team')]
+    public function team(): Response
+    {
+        return $this->render('about/team.html.twig', [
+            'controller_name' => 'AboutController',
+        ]);
+    }
+
+    
+    #[Route('/about/team/{id}', name: 'team_detail')]
+    public function details( /* TeamRepository $teamRepository, int $id */): Response
+    {
+        // $team = $teamRepository->find($id);
+
+        return $this->render('about/team_detail.html.twig', [
+            // 'team' => $team,
+        ]);
+    }
+}
