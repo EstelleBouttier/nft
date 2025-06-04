@@ -88,7 +88,7 @@ class Categories
         return $this->categories;
     }
 
-    public function addCategori(self $category): static
+    public function addCategory(self $category): static
     {
         if (!$this->categories->contains($category)) {
             $this->categories->add($category);
