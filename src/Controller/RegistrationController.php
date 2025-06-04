@@ -52,6 +52,7 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
+            $this->addFlash('success', 'Votre compte a été créé avec succès, un email de confirmation vous a été envoyé.');
             return $security->login($user, LoginAuthenticator::class, 'main');
         }
 
