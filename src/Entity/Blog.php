@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Entity\Trait\DateTrait;
+use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Trait\OnlineTrait;
 use App\Repository\BlogRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
@@ -28,6 +29,9 @@ class Blog
 
     #[ORM\Column(type: "text")]
     private ?string $content = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'blog' )]
+    private ?User $user = null;
 
     #[Vich\UploadableField(mapping: 'blog', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
@@ -111,6 +115,17 @@ class Blog
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
+        return $this;
     }
 
 }

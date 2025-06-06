@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Entity\Trait\DateTrait;
-use App\Repository\TestimonyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TestimonyRepository;
 
 #[ORM\Entity(repositoryClass: TestimonyRepository::class)]
 class Testimony
@@ -17,29 +18,17 @@ class Testimony
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $comment = null;
 
     #[ORM\Column]
     private ?int $note = null;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'testimony' )]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getComment(): ?string
@@ -75,6 +64,17 @@ class Testimony
     {
         $this->createdAt = $createdAt;
 
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
         return $this;
     }
 }
